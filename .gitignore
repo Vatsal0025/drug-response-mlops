@@ -23,3 +23,6 @@ logs/
 
 # MLflow
 mlruns/
+/data
+/artifacts
+/models
