@@ -1,0 +1,29 @@
+project_name: drug-response-mlops
+
+seed: 42
+
+device: cuda
+
+training:
+
+  batch_size: 32
+
+  epochs: 30
+
+  learning_rate: 0.0003
+
+models:
+
+  smiles_embed_dim: 128
+
+  gru_hidden_dim: 384
+
+  structured_dim: 3
+
+  output_dim: 3000
+
+data:
+
+  test_size: 0.2
+
+  top_genes: 3000
