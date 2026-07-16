@@ -15,9 +15,10 @@ from torch_geometric.nn import GCNConv, global_mean_pool
 class GNNModel(nn.Module):
     def __init__(self, struct_dim=3, output_dim=3000):
         super(GNNModel, self).__init__()
-
+        print("Loading GNN model...")
+        print("conv1 input features =", 7)
         # Graph layers
-        self.conv1 = GCNConv(5, 64)
+        self.conv1 = GCNConv(7, 64)
         self.conv2 = GCNConv(64, 128)
 
         # Structured branch

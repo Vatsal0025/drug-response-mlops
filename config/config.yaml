@@ -6,24 +6,52 @@ device: cuda
 
 training:
 
+  model_name: GAT
+
   batch_size: 32
 
-  epochs: 30
+  epochs: 40
 
   learning_rate: 0.0003
-
-models:
-
-  smiles_embed_dim: 128
-
-  gru_hidden_dim: 384
-
-  structured_dim: 3
-
-  output_dim: 3000
 
 data:
 
   test_size: 0.2
 
   top_genes: 3000
+
+models:
+
+  gru:
+    smiles_vocab_size: 33
+
+    smiles_embed_dim: 128
+
+    gru_hidden_dim: 384
+
+    structured_dim: 3
+
+    output_dim: 3000
+
+  gru_attention:
+    smiles_vocab_size: 33
+
+    smiles_embed_dim: 128
+
+    gru_hidden_dim: 384
+
+    structured_dim: 3
+
+    output_dim: 3000
+
+  gnn:
+
+    struct_dim: 3
+
+    output_dim: 3000
+
+  gat:
+
+    struct_dim: 3
+
+    output_dim: 3000
