@@ -9,20 +9,14 @@ rdkit
 numpy
 pandas
 matplotlib
+seaborn
 scikit-learn
 
-jupyter
-notebook
-ipykernel
-
 pyyaml
-
 tqdm
 
-seaborn
-
-dvc
 mlflow
+dvc
 
 fastapi
 uvicorn

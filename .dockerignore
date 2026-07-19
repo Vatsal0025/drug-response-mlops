@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+*.pyc
+
+.git/
+.dvc/
+
+mlruns/
+
+models/
+artifacts/
+
+.ipynb_checkpoints/
+
+*.pth
