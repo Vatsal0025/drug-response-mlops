@@ -8,7 +8,6 @@ __pycache__/
 mlruns/
 
 models/
-artifacts/
 
 .ipynb_checkpoints/
 
