@@ -25,4 +25,4 @@ logs/
 mlruns/
 /data
 /models
-/artifacts
+# /artifacts
