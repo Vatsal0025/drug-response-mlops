@@ -20,5 +20,8 @@ dvc
 
 fastapi
 uvicorn
+pydantic
 
 python-dotenv
+
+

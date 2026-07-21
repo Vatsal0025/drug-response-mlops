@@ -1,0 +1,13 @@
+stages:
+  train:
+    cmd: python src/pipeline/training_pipeline.py
+
+    deps:
+      - src/pipeline/training_pipeline.py
+      - src/components/
+      - src/models/
+      - config/config.yaml
+      - data/
+
+    outs:
+      - artifacts/

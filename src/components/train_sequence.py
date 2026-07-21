@@ -1,5 +1,6 @@
 import time
 import torch
+import os
 from src.components.visualize import save_loss_curve
 from src.components.mlflow_logger import (
     setup_experiment,
@@ -23,7 +24,7 @@ def train_sequence_model(
 
     train_losses = []
     val_losses = []
-
+    best_val_loss = float("inf")
     setup_experiment(experiment_name)
 
     with start_run():
@@ -115,6 +116,19 @@ def train_sequence_model(
             train_losses.append(train_loss)
 
             val_losses.append(val_loss)
+
+
+
+            if val_loss < best_val_loss:
+
+                best_val_loss = val_loss
+
+                os.makedirs("artifacts", exist_ok=True)
+
+                torch.save(
+                    model.state_dict(),
+                    "artifacts/best_model.pth"
+                )
 
             ####################
             # SIGN ACCURACY
