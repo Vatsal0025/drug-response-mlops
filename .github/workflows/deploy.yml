@@ -26,16 +26,40 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY }} .
+      # Build API image
 
-      - name: Tag Docker image
+      - name: Build API Docker image
         run: |
-          docker tag ${{ secrets.ECR_REPOSITORY }}:latest \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
+          docker build \
+          -f Dockerfile.api \
+          -t ${{ secrets.ECR_REPOSITORY_API }} .
 
-      - name: Push Docker image
+      - name: Tag API Docker image
+        run: |
+          docker tag \
+          ${{ secrets.ECR_REPOSITORY_API }}:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_API }}:latest
+
+      - name: Push API Docker image
         run: |
           docker push \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_API }}:latest
+
+      # Build Streamlit image
+
+      - name: Build Streamlit Docker image
+        run: |
+          docker build \
+          -f Dockerfile.streamlit \
+          -t ${{ secrets.ECR_REPOSITORY_STREAMLIT }} .
+
+      - name: Tag Streamlit Docker image
+        run: |
+          docker tag \
+          ${{ secrets.ECR_REPOSITORY_STREAMLIT }}:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_STREAMLIT }}:latest
+
+      - name: Push Streamlit Docker image
+        run: |
+          docker push \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_STREAMLIT }}:latest
