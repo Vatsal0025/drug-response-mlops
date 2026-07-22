@@ -63,3 +63,34 @@ jobs:
         run: |
           docker push \
           ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_STREAMLIT }}:latest
+
+      
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+
+          script: |
+            aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 658214608713.dkr.ecr.us-east-1.amazonaws.com
+
+            sudo docker pull 658214608713.dkr.ecr.us-east-1.amazonaws.com/drug-response-api:latest
+
+            sudo docker pull 658214608713.dkr.ecr.us-east-1.amazonaws.com/drug-response-streamlit:latest
+
+            sudo docker rm -f drug-api || true
+            sudo docker rm -f drug-streamlit || true
+
+            sudo docker run -d \
+              --restart unless-stopped \
+              -p 8000:8000 \
+              --name drug-api \
+              658214608713.dkr.ecr.us-east-1.amazonaws.com/drug-response-api:latest
+
+            sudo docker run -d \
+              --restart unless-stopped \
+              -p 8501:8501 \
+              -e API_URL=http://${{ secrets.EC2_HOST }}:8000/predict \
+              --name drug-streamlit \
+              658214608713.dkr.ecr.us-east-1.amazonaws.com/drug-response-streamlit:latest
