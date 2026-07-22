@@ -5,7 +5,7 @@ import pandas as pd
 API_URL = "http://52.4.155.216:8000/predict"
 
 st.title(
-    "Drug-Induced Gene Expression Prediction System"
+    "DRUG-INDUCED GENE EXPRESSION PREDICTION SYSTEM"
 )
 
 cell_type = st.selectbox(
