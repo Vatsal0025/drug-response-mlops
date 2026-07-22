@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 
-API_URL = "http://3.93.60.206:8000/predict"
+API_URL = "http://52.4.155.216:8000/predict"
 
 st.title(
     "Drug-Induced Gene Expression Prediction"
