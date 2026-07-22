@@ -4,13 +4,8 @@ import pandas as pd
 
 API_URL = "http://52.4.155.216:8000/predict"
 
-st.markdown(
-    """
-    <h1 style='color: red;'>
-        Drug-Induced Gene Expression Prediction
-    </h1>
-    """,
-    unsafe_allow_html=True
+st.title(
+    "Drug-Induced Gene Expression Prediction System"
 )
 
 cell_type = st.selectbox(
